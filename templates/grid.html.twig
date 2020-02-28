@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{%  block grid %}
+<form method="POST">
+<label>Podaj rozmiar planszy</label>
+<select name="size"> 
+    <option value="little">mała(8x8)</option>
+    <option value="medium">średnia(16x16)</option>
+    <option value="large">duża(16x32)</option>
+</select>
+<button type="submit" >utwórz</button>
+</form>
+<table>
+{% for column in 1..size.0 %}
+    <tr>
+    {% for row in 1..size.1 %}
+        <td class="cell"><div class="inner_cell">{{ size.0 }}</div></td> 
+    {% endfor %}
+    </tr>
+{% endfor %}
+{% endblock %}
