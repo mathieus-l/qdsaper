@@ -9,13 +9,14 @@
 </select>
 <button type="submit" >utwórz</button>
 </form>
+<form method="post">
 <table>
-{% for column in 0..size.0-1 %}
+{% for row in 0..size.0-1 %}
     <tr>
-    {% for row in 0..size.1-1 %}
+    {% for column in 0..size.1-1 %}
         <td class="cell">
                 {% if main_grid[column][row] == -1 %}
-                    <button>?</button>
+                    <button type="submit" name="uncover" value="{{ column }}-{{ row }}">?</button>
                 {%  else %}
                     <div class="inner_cell">
                             {{ main_grid[column][row] }}
@@ -25,4 +26,6 @@
     {% endfor %}
     </tr>
 {% endfor %}
+</table>
+</form>
 {% endblock %}

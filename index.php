@@ -19,13 +19,14 @@ if (isset($_POST['size'])){
     $main_grid->beginGrid($size_setting->getArray());  
     $coveredClass->getToCover($main_grid);
    }
+if (isset($_POST['uncover']))
+{
+    $position = explode('-',$_POST['uncover']);
+    $coveredClass->setUncovered($main_grid, $position[0], $position[1]);
+}
 if (!isset($_SESSION['size'])) {
     $_SESSION['size'] = $size;
 }
-    $coveredClass->setUncovered($main_grid, 5, 3);
-    $coveredClass->setUncovered($main_grid, 6, 3);
-    $coveredClass->setUncovered($main_grid, 4, 3);
-    $coveredClass->setUncovered($main_grid, 1, 3);
     echo $twig->render('grid.html.twig', 
         ['size' => $size_setting->getArray(), 
             'sizename' => $size_setting->getName(),
