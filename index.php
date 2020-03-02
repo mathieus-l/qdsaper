@@ -12,16 +12,21 @@ $main_grid = new App\Entity\Grid();
 
 $size_setting = new App\Entity\Size();
 
+    $coveredClass = new App\Entity\Coverage();
 
 if (isset($_POST['size'])){
     $size_setting->setName($_POST['size']);
     $main_grid->beginGrid($size_setting->getArray());  
+    $coveredClass->getToCover($main_grid);
    }
 if (!isset($_SESSION['size'])) {
     $_SESSION['size'] = $size;
-} else {
 }
+    $coveredClass->setUncovered($main_grid, 5, 3);
+    $coveredClass->setUncovered($main_grid, 6, 3);
+    $coveredClass->setUncovered($main_grid, 4, 3);
+    $coveredClass->setUncovered($main_grid, 1, 3);
     echo $twig->render('grid.html.twig', 
         ['size' => $size_setting->getArray(), 
             'sizename' => $size_setting->getName(),
-            'main_grid' => $main_grid->getGrid()]);
+            'main_grid' => $coveredClass->getCoverage()]);

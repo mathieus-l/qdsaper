@@ -13,7 +13,15 @@
 {% for column in 0..size.0-1 %}
     <tr>
     {% for row in 0..size.1-1 %}
-        <td class="cell"><div class="inner_cell">{{ main_grid[column][row] }}</div></td> 
+        <td class="cell">
+                {% if main_grid[column][row] == -1 %}
+                    <button>?</button>
+                {%  else %}
+                    <div class="inner_cell">
+                            {{ main_grid[column][row] }}
+                    </div>
+                {% endif %}
+        </td> 
     {% endfor %}
     </tr>
 {% endfor %}
