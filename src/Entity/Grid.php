@@ -7,19 +7,36 @@ namespace App\Entity;
  * @author mateusz
  */
 class Grid {
-    public function beginGrid(array $size)
+    public function beginGrid(array $size, int $count_mines)
     {
         $result = array(array());
+
         for ($i=0;$i<$size[0];$i++) 
         {
             for ($j=0;$j<$size[1];$j++)
             {
-               $result[$i][$j] = rand(0,1);
+               $result[$i][$j] = 0;
             }
         }
+        $result = $this->random_cell($result, $count_mines);
+                
         $_SESSION['grid'] = $result;
     }
-    
+    private function random_cell(array $grid, $count_mines) : array
+    {
+        for ($i = 0; $i < $count_mines; $i++)
+        {
+            $x = rand(0,count($grid)-1);
+            $y = rand(0,count($grid[0])-1);
+            if ($grid[$x][$y] == 1) {
+                $grid = $this->random_cell($grid, $count_mines - 1);
+            } else {
+                $grid[$x][$y] = 1;
+            }
+        }
+        return $grid;
+    }
+
     public function getGrid() : array
     {
         if (isset($_SESSION['grid'])) {

@@ -16,7 +16,7 @@ $size_setting = new App\Entity\Size();
 
 if (isset($_POST['size'])){
     $size_setting->setName($_POST['size']);
-    $main_grid->beginGrid($size_setting->getArray());  
+    $main_grid->beginGrid($size_setting->getArray(),5);  
     $coveredClass->getToCover($main_grid);
    }
 if (isset($_POST['uncover']))
