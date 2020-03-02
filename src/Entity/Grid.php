@@ -29,4 +29,21 @@ class Grid {
         }
             
     }
+    public function getOneGrid(int $x, int $y) : int
+    {
+        $grid_ = $this->getGrid();
+        return $grid_[$x][$y];
+    }
+    public function getNumOfColumns(): int
+    {
+        $grid_ = $this->getGrid();
+
+        return count($grid_);
+    }
+    public function getNumOfRows(): int
+    {
+        $grid_ = $this->getGrid();
+
+        return count($grid_[0]);
+    }
 }

@@ -17,7 +17,7 @@ class Size {
         if ($size == [16,16]) {
             $_SESSION['sizename'] = 'medium';
         }
-        if ($size == [16,32]) {
+        if ($size == [32,16]) {
             $_SESSION['sizename'] = 'large';
         }
                 
@@ -35,7 +35,7 @@ class Size {
         }
         if ($sizename == 'large')
         {
-            $_SESSION['size'] = [16,32];
+            $_SESSION['size'] = [32,16];
         }
     }
     

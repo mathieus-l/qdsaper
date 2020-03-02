@@ -22,7 +22,7 @@ if (isset($_POST['size'])){
 if (isset($_POST['uncover']))
 {
     $position = explode('-',$_POST['uncover']);
-    $coveredClass->setUncovered($main_grid, $position[0], $position[1]);
+    $coveredClass->uncoverQ($main_grid, $position[0], $position[1]);
 }
 if (!isset($_SESSION['size'])) {
     $_SESSION['size'] = $size;
