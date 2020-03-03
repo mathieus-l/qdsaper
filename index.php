@@ -8,26 +8,26 @@ $size = [3,3];
 
 session_start();
 
-$main_grid = new App\Entity\Grid();
+$grid = new App\Entity\Grid();
+$setting = new App\Entity\Setting();
 
-$size_setting = new App\Entity\Size();
-
-    $coveredClass = new App\Entity\Coverage();
+$mines = new App\Logic\Mines();
+$coverage = new App\Logic\Coverage();
 
 if (isset($_POST['size'])){
-    $size_setting->setName($_POST['size']);
-    $main_grid->beginGrid($size_setting->getArray(),5);  
-    $coveredClass->getToCover($main_grid);
+    $setting->setSizeName($_POST['size']);
+    $mines->beginGrid($setting->getSizeArray(),5);  
+    $coverage->getToCover($grid);
    }
 if (isset($_POST['uncover']))
 {
     $position = explode('-',$_POST['uncover']);
-    $coveredClass->uncoverQ($main_grid, $position[0], $position[1]);
+    $coverage->uncoverQ($grid, $position[0], $position[1]);
 }
 if (!isset($_SESSION['size'])) {
     $_SESSION['size'] = $size;
 }
     echo $twig->render('grid.html.twig', 
-        ['size' => $size_setting->getArray(), 
-            'sizename' => $size_setting->getName(),
-            'main_grid' => $coveredClass->getCoverage()]);
+        ['size' => $setting->getSizeArray(), 
+            'sizename' => $setting->getSizeName(),
+            'main_grid' => $grid->getCoverage()]);

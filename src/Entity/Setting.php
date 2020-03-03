@@ -7,8 +7,8 @@ namespace App\Entity;
  *
  * @author mateusz
  */
-class Size {
-    public function setArray(array $size)
+class Setting {
+    public function setSizeArray(array $size)
     {
         $_SESSION['size'] = $size;
         if ($size == [8,8]) {
@@ -22,7 +22,7 @@ class Size {
         }
                 
     }
-    public function setName(string $sizename)
+    public function setSizeName(string $sizename)
     {
         $_SESSION['sizename'] = $sizename;
         if ($sizename == 'little')
@@ -41,7 +41,7 @@ class Size {
     
     
     
-    public function getName() : string
+    public function getSizeName() : string
     {
         if (isset($_SESSION['sizename'])) {
             return $_SESSION['sizename'];
@@ -49,12 +49,25 @@ class Size {
             return 'little';
         }
     }
-    public function getArray() : array
+        
+    public function getSizeArray() : array
     {
         if (isset($_SESSION['size'])) {
             return $_SESSION['size'];
         } else {
             return [8,8];
         }
+    }
+    public function getMineNumber() : int
+    {
+        if (isset($_SESSION['num_mines'])) {
+            return $_SESSION['num_mines'];
+        } else {
+            return 1;
+        }
+    }
+    public function setMineNumber(int $num_mines)
+    {
+        $_SESSION['num_mines'] = $num_mines;
     }
 }

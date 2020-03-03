@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace App\Entity;
+namespace App\Logic;
 
 use App\Entity\Grid;
 /**
@@ -26,27 +26,20 @@ class Coverage {
         }
         $_SESSION['covered'] = $covered;
     }
-    private function setUncovered(int $x, int $y, int $value)
-    {
-        
-        $covered = $this->getCoverage();
-        $covered[$x][$y] = $value;
-        $_SESSION['covered'] = $covered;
-    }
     public function uncoverQ(Grid $grid, int $x, int $y)
     {
         if ($x >=0 && 
                 $y>=0 && 
                 $x <$grid->getNumOfRows() && 
                 $y <$grid->getNumOfColumns() &&
-                $this->getUncovered($x, $y) < 0)
+                $grid->getUncovered($x, $y) < 0)
         {
-            $covered = $this->getCoverage();
+            $covered = $grid->getCoverage();
             if ($grid->getOneGrid($x, $y) == 1){
-                $this->setUncovered($x, $y, 9);
+                $grid->setUncovered($x, $y, 9);
             } else {
                 $borders = $this->borderer($grid, $x, $y);
-                $this->setUncovered($x, $y, $borders);
+                $grid->setUncovered($x, $y, $borders);
                 if ($borders == 0) {
                     $this->uncoverQ($grid, $x-1, $y-1);
                     $this->uncoverQ($grid, $x-1, $y);
@@ -93,14 +86,4 @@ class Coverage {
             return $borderer;
     }
 
-    private function getUncovered($x,$y)
-    {
-        $covered = $this->getCoverage();
-        return $covered[$x][$y];
-    }
-
-        public function getCoverage()
-    {
-        return $_SESSION['covered'];
-    }
 }
