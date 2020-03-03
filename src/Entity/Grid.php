@@ -58,12 +58,12 @@ class Grid {
     {
         $grid_ = $this->getGrid();
 
-        return count($grid_);
+        return count($grid_[0]);
     }
     public function getNumOfRows(): int
     {
         $grid_ = $this->getGrid();
 
-        return count($grid_[0]);
+        return count($grid_);
     }
 }

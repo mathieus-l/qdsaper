@@ -64,11 +64,26 @@ class Coverage {
     {
            $borderer = 0;
            
-           $grid_borders = $this->gridBorders($grid, $x, $y);
+            $low_r = $x - 1;
+            if ($low_r < 0) {
+                $low_r = 0;
+            }
+            $low_c = $y - 1;
+            if ($low_c < 0) {
+                $low_c = 0;
+            }
+            $high_r = $x + 1;
+            if ($high_r > $grid->getNumOfRows()-1) {
+                $high_r = $x;
+            }
+            $high_c = $y + 1;
+            if ($high_c > $grid->getNumOfColumns()-1) {
+                $high_c = $y;
+            }
            
-            for ($i = $grid_borders['low_r']; $i<=$grid_borders['high_r'];$i++)
+            for ($i = $low_r; $i<=$high_r;$i++)
             {
-                for ($j = $grid_borders['low_c']; $j<=$grid_borders['high_c'];$j++)
+                for ($j = $low_c; $j<=$high_c;$j++)
                 {
                     if ($grid->getOneGrid($i, $j) == 1 ) {
                             $borderer++;
@@ -76,32 +91,6 @@ class Coverage {
                 }
             }        
             return $borderer;
-    }
-    private function gridBorders(Grid $grid, int $x, int $y): array
-    {
-        $low_r = $x - 1;
-        if ($low_r < 0) {
-            $low_r = 0;
-        }
-        $low_c = $y - 1;
-        if ($low_c < 0) {
-            $low_c = 0;
-        }
-        $high_r = $x + 1;
-        if ($high_r > $grid->getNumOfRows()-1) {
-            $high_r = $x;
-        }
-        $high_c = $y + 1;
-        if ($high_c > $grid->getNumOfColumns()-1) {
-            $high_c = $y;
-        }
-        $grid_borders = [
-          'low_r' => $low_r,
-          'low_c' => $low_c,
-          'high_r' => $high_r,
-            'high_c' => $high_c
-        ];
-        return $grid_borders;
     }
 
     private function getUncovered($x,$y)
