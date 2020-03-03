@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace App\Entity;
 
@@ -7,7 +7,8 @@ namespace App\Entity;
  *
  * @author mateusz
  */
-class Setting {
+class Setting
+{
     public function setSizeArray(array $size)
     {
         $_SESSION['size'] = $size;
@@ -20,21 +21,17 @@ class Setting {
         if ($size == [32,16]) {
             $_SESSION['sizename'] = 'large';
         }
-                
     }
     public function setSizeName(string $sizename)
     {
         $_SESSION['sizename'] = $sizename;
-        if ($sizename == 'little')
-        {
+        if ($sizename == 'little') {
             $_SESSION['size'] = [8,8];
         }
-        if ($sizename == 'medium')
-        {
+        if ($sizename == 'medium') {
             $_SESSION['size'] = [16,16];
         }
-        if ($sizename == 'large')
-        {
+        if ($sizename == 'large') {
             $_SESSION['size'] = [32,16];
         }
     }

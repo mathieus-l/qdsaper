@@ -1,21 +1,22 @@
 <?php declare(strict_types = 1);
 
 namespace App\Entity;
+
 /**
  * Description of Grid
  *
  * @author mateusz
  */
-class Grid {
+class Grid
+{
 
     public function getGrid() : array
     {
         if (isset($_SESSION['grid'])) {
             return $_SESSION['grid'];
         } else {
-           return [];
+            return [];
         }
-            
     }
     public function getOneGrid(int $x, int $y) : int
     {
@@ -34,7 +35,7 @@ class Grid {
 
         return count($grid_);
     }
-    public function getUncovered(int $x,int $y) : int
+    public function getUncovered(int $x, int $y) : int
     {
         $covered = $this->getCoverage();
         return $covered[$x][$y];
@@ -51,5 +52,4 @@ class Grid {
         $covered[$x][$y] = $value;
         $_SESSION['covered'] = $covered;
     }
-
 }
