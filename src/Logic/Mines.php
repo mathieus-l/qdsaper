@@ -1,6 +1,8 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace App\Logic;
+
+use App\Entity\Setting;
 
 /**
  * Description of Mines
@@ -8,8 +10,11 @@ namespace App\Logic;
  * @author mateusz
  */
 class Mines {
-    public function beginGrid(array $size, int $count_mines)
+    public function beginGrid()
     {
+        $setting = new Setting();
+        $size = $setting->getSizeArray();
+        $count_mines = $setting->getMineNumber();
         if ($size[0]*$size[1] < $count_mines) {
             throw new \InvalidArgumentException();
         }        

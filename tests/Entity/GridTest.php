@@ -3,7 +3,9 @@
 namespace App\Tests\Entity;
 
 use PHPUnit\Framework\TestCase;
-use \App\Entity\Grid;
+use App\Logic\Mines;
+use App\Entity\Grid;
+use App\Entity\Setting;
 
 class GridTest extends TestCase
 {
@@ -13,14 +15,16 @@ class GridTest extends TestCase
     public function isCorrectNumbersOfMines(): void
     {
         
+        $mines = new Mines();
+        $setting = new Setting();
         $grid = new Grid();
-        $size[0] = 5;
-        $size[1] = 5;
-        $grid->beginGrid($size, 24);
+        $setting->setSizeArray([5,5]);
+        $setting->setMineNumber(24);
+        $mines->beginGrid();
         $count_mines = 0;
-        for ($i = 0; $i < $size[0]; $i++) 
+        for ($i = 0; $i < $setting->getSizeArray()[0]; $i++) 
         {
-            for ($j = 0; $j < $size[1]; $j++) 
+            for ($j = 0; $j < $setting->getSizeArray()[1]; $j++) 
             {
                 $count_mines += $grid->getOneGrid($i, $j);
             }
@@ -33,10 +37,11 @@ class GridTest extends TestCase
      */
     public function isInvalidArgumentException(): void
     {
-        $grid = new Grid();
+        $mines = new Mines();
+        $setting = new Setting();
         $this->expectException ( \InvalidArgumentException :: class ) ; 
-        $size[0] = 5;
-        $size[1] = 5;
-        $grid->beginGrid($size, 27);
+        $setting->setSizeArray([5,5]);
+        $setting->setMineNumber(26);
+        $mines->beginGrid();
     }
 }

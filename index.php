@@ -16,7 +16,8 @@ $coverage = new App\Logic\Coverage();
 
 if (isset($_POST['size'])){
     $setting->setSizeName($_POST['size']);
-    $mines->beginGrid($setting->getSizeArray(),5);  
+    $setting->setMineNumber(5);
+    $mines->beginGrid();  
     $coverage->getToCover($grid);
    }
 if (isset($_POST['uncover']))
