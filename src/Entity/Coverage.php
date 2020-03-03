@@ -35,19 +35,29 @@ class Coverage {
     }
     public function uncoverQ(Grid $grid, int $x, int $y)
     {
-        $covered = $this->getCoverage();
-        $grid_ = $grid->getGrid();
-        if ($grid_[$x][$y] == 1){
-            $this->setUncovered($x, $y, 9);
-        } else {
-            $borders = $this->borderer($grid, $x, $y);
-            $this->setUncovered($x, $y, $borders);
-            
-//            $this->uncoverQ($grid, $x-1, $y,1);
-//            $this->uncoverQ($grid, $x, $y-1,1);
-//            $this->uncoverQ($grid, $x+1, $y,1);
-//            $this->uncoverQ($grid, $x, $y+1,1);
-            
+        if ($x >=0 && 
+                $y>=0 && 
+                $x <$grid->getNumOfRows() && 
+                $y <$grid->getNumOfColumns() &&
+                $this->getUncovered($x, $y) < 0)
+        {
+            $covered = $this->getCoverage();
+            if ($grid->getOneGrid($x, $y) == 1){
+                $this->setUncovered($x, $y, 9);
+            } else {
+                $borders = $this->borderer($grid, $x, $y);
+                $this->setUncovered($x, $y, $borders);
+                if ($borders == 0) {
+                    $this->uncoverQ($grid, $x-1, $y-1);
+                    $this->uncoverQ($grid, $x-1, $y);
+                    $this->uncoverQ($grid, $x-1, $y+1);
+                    $this->uncoverQ($grid, $x, $y-1);
+                    $this->uncoverQ($grid, $x, $y+1);
+                    $this->uncoverQ($grid, $x+1, $y-1);
+                    $this->uncoverQ($grid, $x+1, $y);
+                    $this->uncoverQ($grid, $x+1, $y+1);
+                }
+            }
         }
     }
     private function borderer(Grid $grid, $x,$y)
