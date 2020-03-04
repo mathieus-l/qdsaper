@@ -18,6 +18,14 @@ class Grid
             return [];
         }
     }
+    public function setGrid(array $grid)
+    {
+        $_SESSION['grid'] = $grid;
+    }
+    public function setCoverage(array $covered)
+    {
+        $_SESSION['covered'] = $covered;
+    }
     public function getOneGrid(int $x, int $y) : int
     {
         $grid_ = $this->getGrid();
@@ -43,7 +51,11 @@ class Grid
 
     public function getCoverage() :array
     {
-        return $_SESSION['covered'];
+        if (isset($_SESSION['covered'])) {
+            return $_SESSION['covered'];
+        } else {
+            return [];
+        }
     }
     public function setUncovered(int $x, int $y, int $value)
     {

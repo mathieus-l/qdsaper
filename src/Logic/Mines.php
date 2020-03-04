@@ -3,6 +3,9 @@
 namespace App\Logic;
 
 use App\Entity\Setting;
+use App\Entity\Grid;
+
+use App\Logic\Coverage;
 
 /**
  * Description of Mines
@@ -28,7 +31,11 @@ class Mines
         for ($i = 0; $i < $count_mines; $i++) {
             $result = $this->randomCell($result, $count_mines);
         }
-        $_SESSION['grid'] = $result;
+        $coverage = new Coverage();
+        $grid = new Grid();
+        $grid->setGrid($result);
+        $coverage->getToCover($grid);
+        
     }
     private function randomCell(array $grid, $count_mines) : array
     {

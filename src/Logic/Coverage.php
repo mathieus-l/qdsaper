@@ -13,6 +13,7 @@ class Coverage
 {
     public function getToCover(Grid $grid)
     {
+        $covered = [];
         $i = 0;
         foreach ($grid->getGrid() as $grid_1d) {
             $j = 0;
@@ -22,29 +23,31 @@ class Coverage
             }
             $i++;
         }
-        $_SESSION['covered'] = $covered;
+        $grid->setCoverage($covered);
     }
     public function uncoverQ(Grid $grid, int $x, int $y)
     {
         $numRows = $grid->getNumOfRows();
         $numCols = $grid->getNumOfColumns();
-        $cover_xy = $grid->getUncovered($x, $y);
-        if ($x >=0 && $y>=0 && $x < $numRows && $y < $numCols && $cover_xy < 0) {
-            $covered = $grid->getCoverage();
-            if ($grid->getOneGrid($x, $y) == 1) {
-                $grid->setUncovered($x, $y, 9);
-            } else {
-                $borders = $this->borderer($grid, $x, $y);
-                $grid->setUncovered($x, $y, $borders);
-                if ($borders == 0) {
-                    $this->uncoverQ($grid, $x-1, $y-1);
-                    $this->uncoverQ($grid, $x-1, $y);
-                    $this->uncoverQ($grid, $x-1, $y+1);
-                    $this->uncoverQ($grid, $x, $y-1);
-                    $this->uncoverQ($grid, $x, $y+1);
-                    $this->uncoverQ($grid, $x+1, $y-1);
-                    $this->uncoverQ($grid, $x+1, $y);
-                    $this->uncoverQ($grid, $x+1, $y+1);
+        if ($x >=0 && $y>=0 && $x < $numRows && $y < $numCols) {
+            $cover_xy = $grid->getUncovered($x, $y);
+            if ($cover_xy < 0) {
+                $covered = $grid->getCoverage();
+                if ($grid->getOneGrid($x, $y) == 1) {
+                    $grid->setUncovered($x, $y, 9);
+                } else {
+                    $borders = $this->borderer($grid, $x, $y);
+                    $grid->setUncovered($x, $y, $borders);
+                    if ($borders == 0) {
+                        $this->uncoverQ($grid, $x-1, $y-1);
+                        $this->uncoverQ($grid, $x-1, $y);
+                        $this->uncoverQ($grid, $x-1, $y+1);
+                        $this->uncoverQ($grid, $x, $y-1);
+                        $this->uncoverQ($grid, $x, $y+1);
+                        $this->uncoverQ($grid, $x+1, $y-1);
+                        $this->uncoverQ($grid, $x+1, $y);
+                        $this->uncoverQ($grid, $x+1, $y+1);
+                    }
                 }
             }
         }
