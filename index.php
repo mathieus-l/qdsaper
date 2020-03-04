@@ -11,13 +11,13 @@ session_start();
 $grid = new App\Entity\Grid();
 $setting = new App\Entity\Setting();
 
-$mines = new App\Logic\Mines();
+$play = new App\Logic\Play();
 $coverage = new App\Logic\Coverage();
 
 if (isset($_POST['size'])){
     $setting->setSizeName($_POST['size']);
     $setting->setMineNumber(5);
-    $mines->beginGrid();  
+    $play->beginGrid();  
     $coverage->getToCover($grid);
    }
 if (isset($_POST['uncover']))
