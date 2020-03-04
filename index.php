@@ -14,6 +14,8 @@ $setting = new App\Entity\Setting();
 $play = new App\Logic\Play();
 $coverage = new App\Logic\Coverage();
 
+$state = new \App\Logic\State();
+
 if (isset($_POST['size'])){
     $setting->setSizeName($_POST['size']);
     $setting->setMineNumber(5);
@@ -31,4 +33,5 @@ if (!isset($_SESSION['size'])) {
     echo $twig->render('grid.html.twig', 
         ['size' => $setting->getSizeArray(), 
             'sizename' => $setting->getSizeName(),
-            'main_grid' => $grid->getCoverage()]);
+            'main_grid' => $grid->getCoverage(),
+            'state' => $state->checkState($grid)]);

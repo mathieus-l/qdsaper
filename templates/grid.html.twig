@@ -9,6 +9,8 @@
 </select>
 <button type="submit" >utwórz</button>
 </form>
+    {% if state == 1 %}<span style="color:green;font-weight: bold">Sukces</span> {% endif %}
+    {% if state == -1 %}<span style="color:red;font-weight: bold">Porażka</span> {% endif %}
 <form method="post">
 <table>
 {% for row in 0..size.1-1 %}
@@ -16,12 +18,17 @@
     {% for column in 0..size.0-1 %}
         <td class="cell">
                 {% if main_grid[column][row] == -1 %}
-                    <button type="submit" name="uncover" value="{{ column }}-{{ row }}">?</button>
+                    <button type="submit" {{ state!=0?'disabled' }} name="uncover" value="{{ column }}-{{ row }}">?</button>
                 {%  else %}
                     <div class="inner_cell">
-                            {{ main_grid[column][row] }}
+                            <span 
+                                {{ main_grid[column][row]==9?'style="color:red;font-weight:bold"' }}
+                                {{ main_grid[column][row]==0?'style="display:none"' }}>
+                                {{ main_grid[column][row] }}
+                            </span>
                     </div>
                 {% endif %}
+                
         </td> 
     {% endfor %}
     </tr>

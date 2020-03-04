@@ -35,7 +35,6 @@ class Play
         $grid = new Grid();
         $grid->setGrid($result);
         $coverage->getToCover($grid);
-        
     }
     private function randomCell(array $grid, $count_mines) : array
     {
