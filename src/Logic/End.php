@@ -10,7 +10,7 @@ use App\Entity\Setting;
  *
  * @author mateusz
  */
-class State
+class End
 {
     public function checkState(Grid $grid) :int
     {

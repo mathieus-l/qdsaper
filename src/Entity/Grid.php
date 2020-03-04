@@ -46,7 +46,11 @@ class Grid
     public function getUncovered(int $x, int $y) : int
     {
         $covered = $this->getCoverage();
-        return $covered[$x][$y];
+        if ($covered != []) {
+            return $covered[$x][$y];
+        } else {
+            return -1;
+        }
     }
 
     public function getCoverage() :array

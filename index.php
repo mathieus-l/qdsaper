@@ -14,7 +14,7 @@ $setting = new App\Entity\Setting();
 $play = new App\Logic\Play();
 $coverage = new App\Logic\Coverage();
 
-$state = new \App\Logic\State();
+$end = new \App\Logic\End();
 
 if (isset($_POST['size'])){
     $setting->setSizeName($_POST['size']);
@@ -34,4 +34,4 @@ if (!isset($_SESSION['size'])) {
         ['size' => $setting->getSizeArray(), 
             'sizename' => $setting->getSizeName(),
             'main_grid' => $grid->getCoverage(),
-            'state' => $state->checkState($grid)]);
+            'state' => $end->checkState($grid)]);
