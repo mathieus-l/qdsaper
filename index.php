@@ -33,5 +33,5 @@ if (!isset($_SESSION['size'])) {
     echo $twig->render('grid.html.twig', 
         ['size' => $setting->getSizeArray(), 
             'sizename' => $setting->getSizeName(),
-            'main_grid' => $grid->getCoverage(),
-            'state' => $end->checkState($grid)]);
+            'state' => $end->checkState($grid),
+            'main_grid' => $grid->getCoverage()]);
