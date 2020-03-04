@@ -1,2 +1,2 @@
-# ssaper
-This game is write to learn SOLID priciples
+# qdsaper
+This game is written to learn SOLID priciples.
