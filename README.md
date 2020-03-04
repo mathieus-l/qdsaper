@@ -1,2 +1,2 @@
 # ssaper
-This game is to learn SOLID priciples
+This game is write to learn SOLID priciples
