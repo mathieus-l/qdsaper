@@ -11,15 +11,15 @@ session_start();
 $grid = new App\Entity\Grid();
 $setting = new App\Entity\Setting();
 
-$play = new App\Logic\Play();
+$begin = new App\Logic\Begin();
 $coverage = new App\Logic\Coverage();
 
 $end = new \App\Logic\End();
 
 if (isset($_POST['size'])){
     $setting->setSizeName($_POST['size']);
-    $setting->setMineNumber(5);
-    $play->beginGrid();  
+    $setting->setMineNumber(8);
+    $begin->beginGrid();  
     $coverage->getToCover($grid);
    }
 if (isset($_POST['uncover']))

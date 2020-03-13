@@ -12,7 +12,7 @@ use App\Logic\Coverage;
  *
  * @author mateusz
  */
-class Play
+class Begin
 {
     public function beginGrid()
     {

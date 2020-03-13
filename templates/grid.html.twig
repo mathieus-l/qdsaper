@@ -9,8 +9,6 @@
 </select>
 <button type="submit" >utwórz</button>
 </form>
-    {% if state == 1 %}<span style="color:green;font-weight: bold">Sukces</span> {% endif %}
-    {% if state == -1 %}<span style="color:red;font-weight: bold">Porażka</span> {% endif %}
 <form method="post">
 <table>
 {% for row in 0..size.1-1 %}
@@ -35,4 +33,6 @@
 {% endfor %}
 </table>
 </form>
+    {% if state == 1 %}<span style="color:green;font-weight: bold">Sukces</span> {% endif %}
+    {% if state == -1 %}<span style="color:red;font-weight: bold">Porażka</span> {% endif %}
 {% endblock %}
